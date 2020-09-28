@@ -1,8 +1,7 @@
 {% extends './base.html' %}
 {% load bootstrap4 %}
-
 {% block content %}
-<!--<style>h1 {padding-top: 50px}</style>-->
+
     <h1>{{ message }}</h1>
 
     <form action='{% url "bbs:create" %}' method='post' class='form'>
