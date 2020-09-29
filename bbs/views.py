@@ -38,7 +38,7 @@ def create(request):
         'message': 'Create article ' + str(article.id),
         'article': article,
     }
-    return render(request, 'bbs/index.html', context)
+    return render(request, 'bbs/detail.html', context)
 
 def delete(request, id):
     article = get_object_or_404(Article, pk=id)
@@ -56,10 +56,28 @@ def new(request):
     return HttpResponse('this is new.')
 
 def edit(request, id):
-    return HttpResponse('this is edit ' + str(id))
+    article = get_object_or_404(Article, pk=id)
+    articleForm = ArticleForm(instance=article)
+
+    context = {
+        'message': 'Edit Article',
+        'articles': articles,
+        'articleForm': articleForm,
+    }
+    return render(request, 'bbs/edit.html', context)
 
 def update(request, id):
-    return HttpResponse('this is update ' + str(id))
+    if request.method == 'POST':
+        article = get_object_or_404(Article, pk=id)
+        articleForm = ArticleForm(request.POST, instance=article)
+        if articleForm.is_valid():
+            articleForm.save()
+
+    context = {
+        'message': 'Update article ' + str(id),
+        'article': article,
+    }
+    return render(request, 'bbs/detail.html', context)
 
 def new(request):
     articleForm = ArticleForm()

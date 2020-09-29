@@ -19,7 +19,6 @@
                 <td>{{ article.user_name }}</td>
                 <td>
                     <a href='{% url "bbs:detail" article.id %}' class='btn btn-outline-primary'>詳細</a>
-                    <a href='{% url "bbs:delete" article.id %}' class='btn btn-outline-secondary'>削除</a>
                 </td>
             </tr>
         {% endfor %}
